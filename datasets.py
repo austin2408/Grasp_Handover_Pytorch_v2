@@ -10,7 +10,6 @@ import cv2
 path = '/home/austin/Datasets/HeROS_v2'
 File = os.listdir(path)
 save_path = '/home/austin/Datasets/FCN_Aff'
-# File.sort()
 
 def json2label(idx,f):
     label = np.zeros((4, 224, 224))
