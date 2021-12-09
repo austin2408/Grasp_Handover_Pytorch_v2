@@ -65,8 +65,21 @@ for i, batch in enumerate(dataloader):
             Max.append(np.max(predict[0][i]))
             Re.append(re[i])
 
+        graspable = re[Max.index(max(Max))]
+        graspable [D==0] = 0
+        graspable[graspable>=1] = 0.99999
+        graspable[graspable<0] = 0
+        graspable = cv2.GaussianBlur(graspable, (7, 7), 0)
+        affordanceMap = (graspable/np.max(graspable)*255).astype(np.uint8)
+        affordanceMap = cv2.applyColorMap(affordanceMap, cv2.COLORMAP_JET)
+        affordanceMap = affordanceMap[:,:,[2,1,0]]
+
+        C = cv2.addWeighted(C,0.7,affordanceMap, 0.3,0)
         x, y = np.where(predict[0][Max.index(max(Max))] == np.max(predict[0][Max.index(max(Max))]))
-        C = cv2.circle(C, (y[0]*8, x[0]*8), 2,(0,255,0), 4)
+        # C = cv2.circle(C, (y[0]*8, x[0]*8), 2,(0,255,0), 4)
+
+
+
 
         Data[angle] += 1
         if (Max.index(max(Max)) == angle):
