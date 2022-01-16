@@ -1,7 +1,6 @@
-from matplotlib.image import imread
 import numpy as np
-import matplotlib.pyplot as plt
 import json
+import pandas as pd
 import math
 from random import sample
 import os
@@ -15,10 +14,10 @@ def json2label(idx,f):
     label = np.zeros((4, 224, 224))
     with open(idx,"r") as F:
         data = json.load(F)
-        id = int(len(data['shapes'])/2)
+        points_list = pd.DataFrame(data['shapes'])
+        id = int(points_list.shape[0]/2)
 
-        sample = data['shapes'][id]['points']
-
+        sample = points_list['points'][id]
 
         x = sample[0][0] - sample[1][0]
         y = sample[0][1] - sample[1][1]
@@ -28,8 +27,6 @@ def json2label(idx,f):
         y = abs(y)
         
         theta = math.degrees(math.atan2(y, x))
-        if f == '917':
-            print(theta)
         '''
             0 -> grasp, -90
             1 -> grasp, -45
@@ -54,20 +51,16 @@ def json2label(idx,f):
         
 
 count = 0
-# g = [14,13,39,10]
-g = [0,0,0,0]
+angle_class_count = [0,0,0,0]
 for folder in File:
     ele_color = os.listdir(path+'/'+folder+'/color')
     ele_color.sort()
     ele_depth = os.listdir(path+'/'+folder+'/depth')
     ele_depth.sort()
-    # print(ele_color[1],ele_depth[0])
 
     if len(ele_color) == 3:
-        Lable, Theta = json2label(path+'/'+folder+'/color/'+ele_color[1], folder)
-        g[Theta] += 1
-        if folder == '917':
-            print(folder)
+        Label, Theta = json2label(path+'/'+folder+'/color/'+ele_color[1], folder)
+        angle_class_count[Theta] += 1
 
         color = cv2.imread(path+'/'+folder+'/color/'+ele_color[0])
 
@@ -76,20 +69,17 @@ for folder in File:
 
         cv2.imwrite(save_path+'/color/color_'+str(count)+'.jpg', color)
         np.save(save_path+'/depth/depth_'+str(count), depth)
-        np.save(save_path+'/label/label_'+str(count), Lable)
+        np.save(save_path+'/label/label_'+str(count), Label)
 
         f = open(save_path+'/idx/id_'+str(count)+'.txt', "a")
         f.write(str(Theta)+'\n')
         f.close()
 
         count += 1
-#     print(depth)
-print(g)
-# print(math.degrees(math.atan2(1, 1)))
-# print(math.degrees(math.atan2(-1, -1)))
-# print(math.degrees(math.atan2(-1, 1)))
-# print(math.degrees(math.atan2(1, -1)))
-# print(math.degrees(math.atan2(abs(x), y)))
+
+print(angle_class_count)
+
+# create data list for training and testing
 data_list = os.listdir(save_path+'/color')
 test = sample(data_list, int(len(data_list)*0.05))
 train = list(set(data_list).difference(set(test)))
