@@ -5,7 +5,7 @@ Here is the work base on [GraspNet_Handover_Pytorch](https://github.com/austin24
 ![Teaser](figure/pred_sample.png)
 
 HANet (backbone : ResNet101)<br>
-![Teaser](figure/model.png)
+![Teaser](figure/model_structure.png)
 
 # Dataset Overview
 ![Dataset](figure/datasets.png)
