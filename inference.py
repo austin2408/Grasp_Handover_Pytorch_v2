@@ -19,7 +19,7 @@ from torch.utils.data import Dataset, DataLoader
 
 from matplotlib import pyplot as plt
 import numpy as np
-import time
+from time import time
 import os
 from model import *
 from Dataloader import *
@@ -27,7 +27,7 @@ import argparse
 
 net = GraspNet(4)
 net = net.cuda()
-net.load_state_dict(torch.load('/home/austin/Datasets/FCN_Aff/weight/grapnet_50_0.001184779648870712.pth'))
+net.load_state_dict(torch.load('/home/austin/HANet_v2/grapnet_50_0.001184779648870712.pth'))
 net.eval()
 
 dataset = parallel_jaw_based_grasping_dataset('/home/austin/Datasets/FCN_Aff', mode='test')
@@ -48,6 +48,8 @@ for i, batch in enumerate(dataloader):
         depth = batch['depth'].cuda()
         label = batch['label'].permute(0,2,3,1)
         angle = batch['id'][0].item()
+
+        start = time.time()
 
         predict = net(color, depth)
         predict = predict.cpu().detach().numpy()
@@ -76,6 +78,8 @@ for i, batch in enumerate(dataloader):
 
         C = cv2.addWeighted(C,0.7,affordanceMap, 0.3,0)
         x, y = np.where(predict[0][Max.index(max(Max))] == np.max(predict[0][Max.index(max(Max))]))
+
+        print("Computing time : ",time.time() - start)
         # C = cv2.circle(C, (y[0]*8, x[0]*8), 2,(0,255,0), 4)
 
 
