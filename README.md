@@ -4,7 +4,7 @@ Here is the work base on [HANet](https://github.com/austin2408/HANet) but change
 
 ![Teaser](figure/pred_sample.png)
 
-## HANet (backbone : ResNet101)<br>
+## HANet network structure (backbone : ResNet101)<br>
 ![Teaser](figure/model_structure.png)
 
 HANet trained weight
