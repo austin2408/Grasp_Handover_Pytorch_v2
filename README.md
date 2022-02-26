@@ -7,5 +7,11 @@ Here is the work base on [HANet](https://github.com/austin2408/HANet) but change
 HANet (backbone : ResNet101)<br>
 ![Teaser](figure/model_structure.png)
 
+HANet trained weight
+|Backbone   | position accuracy  | angle accuracy  | Google Drive                                                                                                         |
+|:---------:|:------------------:|:---------------:|:--------------------------------------------------------------------------------------------------------------------:|
+|Resnet101  | 30.25              | 28.04           | [HANet_v2.pth](https://drive.google.com/file/d/1GdmI3zb83EqiRxhsHjD9sXx9VWmJZCrI/view?usp=sharing)  |
+
+
 # Dataset Overview
 ![Dataset](figure/datasets.png)
