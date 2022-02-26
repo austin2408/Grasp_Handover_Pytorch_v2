@@ -72,6 +72,6 @@ for epoch in range(args.epoch):
     scheduler.step()
     loss_l.append(loss_sum/len(dataloader))
     if (epoch+1)%args.save_every==0:
-        torch.save(net.state_dict(), args.data_dir + '/weight/grapnet_{}_{}.pth' .format(epoch+1, loss_l[-1]))
+        torch.save(net.state_dict(), args.data_dir + '/weight/grapnet_{}_{}.pth' .format(epoch+1, round(loss_l[-1],3)))
 
     print("Epoch: {}| Loss: {}| Time elasped: {}".format(epoch+1, loss_l[-1], time.time()-ts))
