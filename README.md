@@ -13,6 +13,6 @@ HANet trained weight
 |Resnet101  | 88.75              | 90.17           | [HANet_v2.pth](https://drive.google.com/file/d/1GdmI3zb83EqiRxhsHjD9sXx9VWmJZCrI/view?usp=sharing)  |
 
 
-## Dataset Overview
+## Datasets Overview
 [HANet_v2_datasets.zip](https://drive.google.com/file/d/19wH12w2vgj7ps9x4DrWFZ7P6dZ3F289C/view?usp=sharing)<br>
 ![Dataset](figure/datasets.png)
