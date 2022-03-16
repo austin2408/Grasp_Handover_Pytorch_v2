@@ -1,24 +1,7 @@
 import torch
 import torch.nn as nn
 import torch.optim as optim
-import torchvision
-from torchvision import models
-import torch.nn.functional as F
-from torchvision.models.resnet import ResNet
-from torch.utils import model_zoo
-import random
-import sys
-import math
-
-import torchvision.transforms as transforms
-
-import cv2
-from torch.optim import lr_scheduler
-from torch.autograd import Variable
-from torch.utils.data import Dataset, DataLoader
-
-from matplotlib import pyplot as plt
-import numpy as np
+from torch.utils.data import  DataLoader
 import time
 import os
 from model import *
@@ -27,7 +10,7 @@ import argparse
 
 
 parser = argparse.ArgumentParser(description='Set up')
-parser.add_argument('--data_dir', type=str, default = '/home/austin/Datasets/FCN_Aff')
+parser.add_argument('--data_dir', type=str, default = '/home/austin/Datasets/bottle_cap')
 parser.add_argument('--epoch', type=int, default = 50)
 parser.add_argument('--save_every', type=int, default = 25)
 parser.add_argument('--batch_size', type=int, default = 5)
