@@ -16,7 +16,7 @@ class parallel_jaw_based_grasping_dataset(Dataset):
             f = open(self.data_dir+"/train.txt", "r")
         else:
             f = open(self.data_dir+"/test.txt", "r")
-        for i, line in enumerate(f):
+        for _, line in enumerate(f):
               self.name.append(line.replace("\n", ""))
 
         print(len(self.name))
