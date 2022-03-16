@@ -1,28 +1,7 @@
-import torch
-import torch.nn as nn
-import torch.optim as optim
-import torchvision
-from torchvision import models
-import torch.nn.functional as F
-from torchvision.models.resnet import ResNet
-from torch.utils import model_zoo
-import random
-import sys
-import copy
-import math
-import pandas as pd
-
 import torchvision.transforms as transforms
-
 import cv2
-from torch.optim import lr_scheduler
-from torch.autograd import Variable
-from torch.utils.data import Dataset, DataLoader
-
-from matplotlib import pyplot as plt
+from torch.utils.data import Dataset
 import numpy as np
-import time
-import os
 
 
 image_net_mean = np.array([0.485, 0.456, 0.406])
